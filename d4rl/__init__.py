@@ -166,6 +166,9 @@ def sequence_dataset(env, dataset=None, **kwargs):
 
     episode_step = 0
     for i in range(N):
+        for k in dataset:
+            data_[k].append(dataset[k][i])
+
         done_bool = bool(dataset['terminals'][i])
         if use_timeouts:
             final_timestep = dataset['timeouts'][i]
@@ -180,7 +183,5 @@ def sequence_dataset(env, dataset=None, **kwargs):
             yield episode_data
             data_ = collections.defaultdict(list)
 
-        for k in dataset:
-            data_[k].append(dataset[k][i])
         episode_step += 1
 
