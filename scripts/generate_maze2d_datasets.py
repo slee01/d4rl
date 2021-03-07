@@ -58,9 +58,13 @@ def main():
     
     for episode in range(args.num_episodes):
         s = env.reset()
-        env.set_target(np.array([1.0, 1.0]))
         act = env.action_space.sample()
         done, episode_step = False, 0
+        
+        if args.fixed_target:
+            env.set_target(np.array([1.0, 1.0]))
+        else:
+            env.set_target()
         
         while not done:
             position = s[0:2]
