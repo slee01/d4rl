@@ -52,7 +52,9 @@ def main():
     controller = waypoint_controller.WaypointController(maze)
     env = maze_model.MazeEnv(maze)
 
-    env.set_target()
+    # env.set_target()
+    env.set_target(np.array([1.0, 1.0]))
+    
     s = env.reset()
     act = env.action_space.sample()
     done = False
@@ -62,7 +64,7 @@ def main():
     for _ in range(args.num_samples):
         position = s[0:2]
         velocity = s[2:4]
-        act, done = controller.get_action(position, velocity, env._target)
+        act, done = controller.get_action(ts, position, velocity, env._target)
         if args.noisy:
             act = act + np.random.randn(*act.shape)*0.5
 
@@ -78,7 +80,8 @@ def main():
 
         ts += 1
         if done:
-            env.set_target()
+            # env.set_target()
+            s = env.reset()
             done = False
             ts = 0
         else:
