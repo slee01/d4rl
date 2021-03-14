@@ -27,9 +27,10 @@ class WaypointController(object):
     def current_waypoint(self):
         return self._waypoints[self._waypoint_idx]
 
-    def get_action(self, location, velocity, target):
-        if np.linalg.norm(self._target - np.array(self.gridify_state(target))) > 1e-3: 
+    def get_action(self, episode_step, location, velocity, target):
+        if episode_step == 0 or np.linalg.norm(self._target - np.array(self.gridify_state(target))) > 1e-3:
             #print('New target!', target, 'old:', self._target)
+            print("New Episode!", " Location: ", location, " Velocity: ", velocity, " Target: ", target)
             self._new_target(location, target)
 
         dist = np.linalg.norm(location - self._target)
