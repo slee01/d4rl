@@ -44,7 +44,7 @@ def main():
     parser.add_argument('--fixed-target', action='store_true', help='Fixed target point')
     parser.add_argument('--env_name', type=str, default='maze2d-umaze-v1', help='Maze type')
     parser.add_argument('--num_samples', type=int, default=int(1e6), help='Num samples to collect')
-    parser.add_argument('--num_episodes', type=int, default=int(1e3), help='Num samples to collect')
+    parser.add_argument('--num_episodes', type=int, default=int(1e3), help='Num episodes to collect')
     args = parser.parse_args()
     
     data = reset_data()
@@ -69,7 +69,7 @@ def main():
         while not done:
             position = s[0:2]
             velocity = s[2:4]
-            act, done = controller.get_action(episode_step, position, velocity, env._target)
+            act, _done = controller.get_action(episode_step, position, velocity, env._target)
             if args.noisy:
                 act = act + np.random.randn(*act.shape) * 0.5
 
