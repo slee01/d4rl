@@ -5,7 +5,7 @@ import gym
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--env_name', type=str, default='maze2d-umaze-v0')
+    parser.add_argument('--env-name', type=str, default='maze2d-umaze-v0')
     args = parser.parse_args()
 
     env = gym.make(args.env_name)
