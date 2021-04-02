@@ -8,6 +8,9 @@ import gzip
 import h5py
 import argparse
 
+# python scripts/generate_maze2d_datasets.py --env-name maze2d-umaze-v1 --fixed-target
+# python scripts/generate_maze2d_datasets.py --env-name maze2d-medium-v1 --fixed-target
+# python scripts/generate_maze2d_datasets.py --env-name maze2d-large-v1 --fixed-target
 
 def reset_data():
     return {'observations': [],
