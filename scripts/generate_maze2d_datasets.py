@@ -39,12 +39,12 @@ def npify(data):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--render', action='store_true', help='Render trajectories')
     parser.add_argument('--noisy', action='store_true', help='Noisy actions')
     parser.add_argument('--fixed-target', action='store_true', help='Fixed target point')
-    parser.add_argument('--env_name', type=str, default='maze2d-umaze-v1', help='Maze type')
-    parser.add_argument('--num_samples', type=int, default=int(1e6), help='Num samples to collect')
-    parser.add_argument('--num_episodes', type=int, default=int(1e3), help='Num episodes to collect')
+    parser.add_argument('--env-name', type=str, default='maze2d-umaze-v1', help='Maze type')
+    parser.add_argument('--num-samples', type=int, default=int(1e6), help='Num samples to collect')
+    parser.add_argument('--num-episodes', type=int, default=int(1e3), help='Num episodes to collect')
+    parser.add_argument('--render', action='store_true', help='Render trajectories')
     args = parser.parse_args()
     
     data = reset_data()
