@@ -65,7 +65,15 @@ def main():
         done, episode_step = False, 0
         
         if args.fixed_target:
-            env.set_target(np.array([1.0, 1.0]))
+            if args.env_name == "maze2d-umaze-v1":
+                env.set_target(np.array([1.0, 1.0]))
+            elif args.env_name == "maze2d-medium-v1":
+                env.set_target(np.array([6.0, 6.0]))
+            elif args.env_name == "maze2d-large-v1":
+                env.set_target(np.array([7.0, 9.0]))
+            else:
+                raise NotImplementedError("You should define goal point before generate dataset.\n",
+                                          "Available task: maze2d-umaze-v1 | maze2d-medium-v1 | maze2d-large-v1")
         else:
             env.set_target()
         
