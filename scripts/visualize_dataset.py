@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
     env = gym.make(args.env_name)
     
-    dataset = env.get_dataset()
+    dataset = env.get_dataset("/home/slee01/PycharmProjects/task_planner/d4rl/{}.hdf5".format(args.env_name))
     if 'infos/qpos' not in dataset:
         raise ValueError('Only MuJoCo-based environments can be visualized')
     qpos = dataset['infos/qpos']
