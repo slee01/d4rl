@@ -62,7 +62,7 @@ def main():
     for episode in range(args.num_episodes):
         s = env.reset()
         act = env.action_space.sample()
-        done, episode_step = False, 0
+        done, episode_step, episode_reward = False, 0, 0
         
         if args.fixed_target:
             if args.env_name == "maze2d-umaze-v1":
@@ -90,8 +90,9 @@ def main():
                 
             append_data(data, s, act, env._target, done, env.sim.data)
     
-            ns, _, _, _ = env.step(act)
-
+            ns, r, _, _ = env.step(act)
+            episode_reward += r
+            
             if len(data['observations']) % 10000 == 0:
                 print(len(data['observations']))
 
@@ -104,7 +105,7 @@ def main():
     
             if args.render:
                 env.render()
-    
+        print("episode_reward: ", episode_reward)
     if args.noisy:
         fname = '%s-noisy.hdf5' % args.env_name
     else:
