@@ -11,6 +11,7 @@ import argparse
 # python scripts/generate_maze2d_datasets.py --env-name maze2d-umaze-v1 --fixed-target
 # python scripts/generate_maze2d_datasets.py --env-name maze2d-medium-v1 --fixed-target
 # python scripts/generate_maze2d_datasets.py --env-name maze2d-large-v1 --fixed-target
+# python scripts/generate_maze2d_datasets.py --env-name maze2d-large-v0 --fixed-target
 
 def reset_data():
     return {'observations': [],
@@ -69,7 +70,7 @@ def main():
                 env.set_target(np.array([1.0, 1.0]))
             elif args.env_name == "maze2d-medium-v1":
                 env.set_target(np.array([6.0, 6.0]))
-            elif args.env_name == "maze2d-large-v1":
+            elif args.env_name == "maze2d-large-v0" or args.env_name == "maze2d-large-v1":
                 env.set_target(np.array([7.0, 9.0]))
             else:
                 raise NotImplementedError("You should define goal point before generate dataset.\n",
