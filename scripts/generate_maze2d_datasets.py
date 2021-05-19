@@ -8,6 +8,7 @@ import gzip
 import h5py
 import argparse
 
+# python scripts/generate_maze2d_datasets.py --env-name maze2d-open-v0 --fixed-target
 # python scripts/generate_maze2d_datasets.py --env-name maze2d-umaze-v1 --fixed-target
 # python scripts/generate_maze2d_datasets.py --env-name maze2d-medium-v1 --fixed-target
 # python scripts/generate_maze2d_datasets.py --env-name maze2d-large-v1 --fixed-target
@@ -66,7 +67,9 @@ def main():
         done, episode_step, episode_reward = False, 0, 0
         
         if args.fixed_target:
-            if args.env_name == "maze2d-umaze-v1":
+            if args.env_name == "maze2d-open-v0":
+                env.set_target(np.array([2.0, 3.0]))
+            elif args.env_name == "maze2d-umaze-v1":
                 env.set_target(np.array([1.0, 1.0]))
             elif args.env_name == "maze2d-medium-v1":
                 env.set_target(np.array([6.0, 6.0]))
