@@ -219,7 +219,7 @@ class MazeEnv(mujoco_env.MujocoEnv, utils.EzPickle, offline_env.OfflineEnv):
         self.data.site_xpos[self.model.site_name2id('target_site')] = np.array([self._target[0]+1, self._target[1]+1, 0.0])
 
     def clip_velocity(self):
-        qvel = np.clip(self.sim.data.qvel, -5.0, 5.0)
+        qvel = np.clip(self.sim.data.qvel, -1.0, 1.0)
         self.set_state(self.sim.data.qpos, qvel)
 
     def reset_model(self):
