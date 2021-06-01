@@ -189,8 +189,9 @@ class MazeEnv(mujoco_env.MujocoEnv, utils.EzPickle, offline_env.OfflineEnv):
 
     def step(self, action):
         action = np.clip(action, -1.0, 1.0)
-        self.clip_velocity()
+        
         self.do_simulation(action, self.frame_skip)
+        self.clip_velocity()
         self.set_marker()
         ob = self._get_obs()
         if self.reward_type == 'sparse':
