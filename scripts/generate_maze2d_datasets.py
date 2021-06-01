@@ -50,6 +50,7 @@ def main():
     parser.add_argument('--num-samples', type=int, default=int(1e6), help='Num samples to collect')
     parser.add_argument('--num-episodes', type=int, default=int(1e3), help='Num episodes to collect')
     parser.add_argument('--render', action='store_true', help='Render trajectories')
+    parser.add_argument('--save-datasets', default= False, action='store_true', help='Save datasets')
     args = parser.parse_args()
     
     data = reset_data()
@@ -110,14 +111,17 @@ def main():
             if args.render:
                 env.render()
         print("episode_reward: ", episode_reward)
-    if args.noisy:
-        fname = '%s-noisy.hdf5' % args.env_name
-    else:
-        fname = '%s.hdf5' % args.env_name
-    dataset = h5py.File(fname, 'w')
-    npify(data)
-    for k in data:
-        dataset.create_dataset(k, data=data[k], compression='gzip')
+    
+    if args.save_dataset:
+        if args.noisy:
+            fname = '%s-noisy.hdf5' % args.env_name
+        else:
+            fname = '%s.hdf5' % args.env_name
+            
+        dataset = h5py.File(fname, 'w')
+        npify(data)
+        for k in data:
+            dataset.create_dataset(k, data=data[k], compression='gzip')
 
 
 if __name__ == "__main__":
